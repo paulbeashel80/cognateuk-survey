@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Ready Programme | Evaluation Survey</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0fdfa;
+            color: #334155;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 { color: #0d9488; font-size: 24px; margin-bottom: 8px; text-align: center; }
+        .subtitle { text-align: center; color: #64748b; margin-bottom: 24px; font-size: 14px; }
+        .section { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e2e8f0; }
+        .section-title { color: #0d9488; font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+        .question { margin-bottom: 20px; }
+        .question-label { display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b; }
+        .required { color: #ef4444; }
+        .hint { font-size: 13px; color: #64748b; font-weight: normal; }
+        input[type="text"], input[type="email"], textarea, select {
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0;
+            border-radius: 8px; font-size: 16px; font-family: inherit;
+        }
+        textarea { min-height: 80px; resize: vertical; }
+        .rating-scale { display: flex; gap: 8px; flex-wrap: wrap; }
+        .rating-option { flex: 1; min-width: 50px; text-align: center; }
+        .rating-option input { display: none; }
+        .rating-option label {
+            display: block; padding: 12px 8px; background: #f1f5f9;
+            border-radius: 8px; cursor: pointer; font-weight: 600; color: #64748b;
+        }
+        .rating-option input:checked + label { background: #0d9488; color: white; }
+        .slider-container { padding: 8px 0; }
+        input[type="range"] {
+            width: 100%; height: 8px; -webkit-appearance: none;
+            background: #e2e8f0; border-radius: 4px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 24px; height: 24px;
+            border-radius: 50%; background: #0d9488;
+        }
+        .slider-value { text-align: center; font-size: 24px; font-weight: 700; color: #0d9488; margin-top: 8px; }
+        .submit-section {
+            background: #f0fdfa; border-radius: 12px; padding: 24px;
+            margin-top: 32px; text-align: center;
+        }
+        .btn {
+            padding: 16px 24px; border-radius: 10px; font-size: 16px;
+            font-weight: 600; cursor: pointer; border: none; margin: 8px;
+        }
+        .btn-primary { background: #0d9488; color: white; }
+        .btn-secondary { background: white; color: #0d9488; border: 2px solid #0d9488; }
+        #output-area {
+            display: none; margin-top: 24px; padding: 16px;
+            background: #f8fafc; border-radius: 8px;
+        }
+        #output-text {
+            width: 100%; min-height: 200px; font-family: monospace;
+            font-size: 12px; padding: 12px; margin-bottom: 12px;
+        }
+        .email-address {
+            font-weight: 700; color: #0d9488; font-size: 16px;
+            margin: 12px 0; padding: 12px; background: white; border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Future-Ready Programme</h1>
+    <p class="subtitle">Post-Programme Evaluation Survey | January 2026 Pilot</p>
+    
+    <form id="surveyForm">
+        
+        <div class="section">
+            <h2 class="section-title">Section A: Your Details</h2>
+            <div class="question">
+                <label class="question-label">1. Your Name <span class="hint">(optional)</span></label>
+                <input type="text" id="studentName" placeholder="Enter your full name or leave blank">
+            </div>
+            <div class="question">
+                <label class="question-label">2. Your School <span class="required">*</span></label>
+                <select id="school" required>
+                    <option value="">-- Please select --</option>
+                    <option value="Southend High School for Boys">Southend High School for Boys</option>
+                    <option value="Southend High School for Girls">Southend High School for Girls</option>
+                    <option value="Lincoln Minster School">Lincoln Minster School</option>
+                </select>
+            </div>
+            <div class="question">
+                <label class="question-label">3. A-level subjects you are studying</label>
+                <textarea id="subjects" placeholder="e.g., Mathematics, Biology, Chemistry..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Section B: Overall Programme (1-5 scale)</h2>
+            <p class="hint" style="margin-bottom:16px">1 = Strongly Disagree, 5 = Strongly Agree</p>
+            
+            <div class="question">
+                <label class="question-label">4. The programme met my expectations <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q4" id="q4_1" value="1"><label for="q4_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q4" id="q4_2" value="2"><label for="q4_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q4" id="q4_3" value="3"><label for="q4_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q4" id="q4_4" value="4"><label for="q4_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q4" id="q4_5" value="5"><label for="q4_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">5. I would recommend this to others <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q5" id="q5_1" value="1"><label for="q5_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q5" id="q5_2" value="2"><label for="q5_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q5" id="q5_3" value="3"><label for="q5_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q5" id="q5_4" value="4"><label for="q5_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q5" id="q5_5" value="5"><label for="q5_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">6. Five-session format was appropriate <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q6" id="q6_1" value="1"><label for="q6_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q6" id="q6_2" value="2"><label for="q6_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q6" id="q6_3" value="3"><label for="q6_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q6" id="q6_4" value="4"><label for="q6_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q6" id="q6_5" value="5"><label for="q6_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">7. Timing (16:00-17:50) worked well <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q7" id="q7_1" value="1"><label for="q7_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q7" id="q7_2" value="2"><label for="q7_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q7" id="q7_3" value="3"><label for="q7_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q7" id="q7_4" value="4"><label for="q7_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q7" id="q7_5" value="5"><label for="q7_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">8. Coaching/AI mix was balanced <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q8" id="q8_1" value="1"><label for="q8_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q8" id="q8_2" value="2"><label for="q8_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q8" id="q8_3" value="3"><label for="q8_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q8" id="q8_4" value="4"><label for="q8_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q8" id="q8_5" value="5"><label for="q8_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">9. Overall effectiveness (drag slider)</label>
+                <div class="slider-container">
+                    <input type="range" id="effectiveness" min="0" max="100" value="75" oninput="document.getElementById('effVal').textContent=this.value">
+                    <div class="slider-value"><span id="effVal">75</span> / 100</div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">10. Most valuable thing you gained?</label>
+                <textarea id="mostValuable" placeholder="Your key takeaway..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Section C: Coaching Sessions (Jeff Greenidge)</h2>
+            <div class="question">
+                <label class="question-label">11. Helped me understand myself better <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q11" id="q11_1" value="1"><label for="q11_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q11" id="q11_2" value="2"><label for="q11_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q11" id="q11_3" value="3"><label for="q11_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q11" id="q11_4" value="4"><label for="q11_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q11" id="q11_5" value="5"><label for="q11_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">12. Values exercise was useful <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q12" id="q12_1" value="1"><label for="q12_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q12" id="q12_2" value="2"><label for="q12_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q12" id="q12_3" value="3"><label for="q12_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q12" id="q12_4" value="4"><label for="q12_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q12" id="q12_5" value="5"><label for="q12_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">13. SCARF model was helpful <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q13" id="q13_1" value="1"><label for="q13_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q13" id="q13_2" value="2"><label for="q13_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q13" id="q13_3" value="3"><label for="q13_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q13" id="q13_4" value="4"><label for="q13_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q13" id="q13_5" value="5"><label for="q13_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">14. Jeff's facilitation was engaging <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q14" id="q14_1" value="1"><label for="q14_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q14" id="q14_2" value="2"><label for="q14_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q14" id="q14_3" value="3"><label for="q14_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q14" id="q14_4" value="4"><label for="q14_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q14" id="q14_5" value="5"><label for="q14_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">15. More confident planning my future <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q15" id="q15_1" value="1"><label for="q15_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q15" id="q15_2" value="2"><label for="q15_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q15" id="q15_3" value="3"><label for="q15_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q15" id="q15_4" value="4"><label for="q15_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q15" id="q15_5" value="5"><label for="q15_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">16. Which coaching activity had biggest impact?</label>
+                <textarea id="coachingImpact" placeholder="Tell us which activity resonated most..."></textarea>
+            </div>
+            <div class="question">
+                <label class="question-label">17. How could coaching be improved?</label>
+                <textarea id="coachingImprove" placeholder="Your suggestions..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Section D: AI Sessions (Prof. Graham Ball)</h2>
+            <div class="question">
+                <label class="question-label">18. I understand AI, ML and generative AI <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q18" id="q18_1" value="1"><label for="q18_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q18" id="q18_2" value="2"><label for="q18_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q18" id="q18_3" value="3"><label for="q18_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q18" id="q18_4" value="4"><label for="q18_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q18" id="q18_5" value="5"><label for="q18_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">19. Explanations of how AI learns were clear <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q19" id="q19_1" value="1"><label for="q19_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q19" id="q19_2" value="2"><label for="q19_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q19" id="q19_3" value="3"><label for="q19_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q19" id="q19_4" value="4"><label for="q19_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q19" id="q19_5" value="5"><label for="q19_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">20. More aware of AI limitations/biases <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q20" id="q20_1" value="1"><label for="q20_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q20" id="q20_2" value="2"><label for="q20_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q20" id="q20_3" value="3"><label for="q20_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q20" id="q20_4" value="4"><label for="q20_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q20" id="q20_5" value="5"><label for="q20_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">21. Understand appropriate AI use in schoolwork <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q21" id="q21_1" value="1"><label for="q21_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q21" id="q21_2" value="2"><label for="q21_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q21" id="q21_3" value="3"><label for="q21_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q21" id="q21_4" value="4"><label for="q21_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q21" id="q21_5" value="5"><label for="q21_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">22. Prof Ball's teaching was engaging <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q22" id="q22_1" value="1"><label for="q22_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q22" id="q22_2" value="2"><label for="q22_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q22" id="q22_3" value="3"><label for="q22_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q22" id="q22_4" value="4"><label for="q22_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q22" id="q22_5" value="5"><label for="q22_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">23. Confident using AI responsibly <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q23" id="q23_1" value="1"><label for="q23_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q23" id="q23_2" value="2"><label for="q23_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q23" id="q23_3" value="3"><label for="q23_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q23" id="q23_4" value="4"><label for="q23_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q23" id="q23_5" value="5"><label for="q23_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">24. Most surprising thing about AI?</label>
+                <textarea id="aiSurprise" placeholder="What surprised you..."></textarea>
+            </div>
+            <div class="question">
+                <label class="question-label">25. Topics wanting more depth?</label>
+                <textarea id="aiMoreDepth" placeholder="What would you like to learn more about..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Section E: Platform and ProfBot</h2>
+            <div class="question">
+                <label class="question-label">26. Platform was easy to navigate <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q26" id="q26_1" value="1"><label for="q26_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q26" id="q26_2" value="2"><label for="q26_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q26" id="q26_3" value="3"><label for="q26_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q26" id="q26_4" value="4"><label for="q26_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q26" id="q26_5" value="5"><label for="q26_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">27. Could find resources easily <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q27" id="q27_1" value="1"><label for="q27_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q27" id="q27_2" value="2"><label for="q27_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q27" id="q27_3" value="3"><label for="q27_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q27" id="q27_4" value="4"><label for="q27_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q27" id="q27_5" value="5"><label for="q27_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">28. Did you use ProfBot? <span class="required">*</span></label>
+                <select id="usedProfBot" required>
+                    <option value="">-- Please select --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="question">
+                <label class="question-label">29. ProfBot feedback (or why you did not use it)</label>
+                <textarea id="profBotFeedback" placeholder="Share your experience..."></textarea>
+            </div>
+            <div class="question">
+                <label class="question-label">30. Platform/ProfBot improvements?</label>
+                <textarea id="platformImprove" placeholder="Your suggestions..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Section F: Final Thoughts</h2>
+            <div class="question">
+                <label class="question-label">31. Influenced my university/career thinking <span class="required">*</span></label>
+                <div class="rating-scale">
+                    <div class="rating-option"><input type="radio" name="q31" id="q31_1" value="1"><label for="q31_1">1</label></div>
+                    <div class="rating-option"><input type="radio" name="q31" id="q31_2" value="2"><label for="q31_2">2</label></div>
+                    <div class="rating-option"><input type="radio" name="q31" id="q31_3" value="3"><label for="q31_3">3</label></div>
+                    <div class="rating-option"><input type="radio" name="q31" id="q31_4" value="4"><label for="q31_4">4</label></div>
+                    <div class="rating-option"><input type="radio" name="q31" id="q31_5" value="5"><label for="q31_5">5</label></div>
+                </div>
+            </div>
+            <div class="question">
+                <label class="question-label">32. Will you continue using the platform?</label>
+                <select id="continuePlatform">
+                    <option value="">-- Please select --</option>
+                    <option value="Yes, definitely">Yes, definitely</option>
+                    <option value="Probably">Probably</option>
+                    <option value="Not sure">Not sure</option>
+                    <option value="Probably not">Probably not</option>
+                </select>
+            </div>
+            <div class="question">
+                <label class="question-label">33. Interested in future programmes?</label>
+                <select id="futureInterest">
+                    <option value="">-- Please select --</option>
+                    <option value="Yes, definitely">Yes, definitely</option>
+                    <option value="Probably">Probably</option>
+                    <option value="Not sure">Not sure</option>
+                    <option value="Probably not">Probably not</option>
+                </select>
+            </div>
+            <div class="question">
+                <label class="question-label">34. One thing you would change?</label>
+                <textarea id="oneChange" placeholder="What single change would help..."></textarea>
+            </div>
+            <div class="question">
+                <label class="question-label">35. Any other comments?</label>
+                <textarea id="additionalComments" placeholder="Anything else..."></textarea>
+            </div>
+            <div class="question">
+                <label class="question-label">36. Willing to do a follow-up interview?</label>
+                <select id="willingInterview">
+                    <option value="">-- Please select --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="question">
+                <label class="question-label">37. If yes, your email address</label>
+                <input type="email" id="contactEmail" placeholder="your.email@example.com">
+            </div>
+        </div>
+        
+        <div class="submit-section">
+            <h3>Ready to Submit?</h3>
+            <p>Click the button below, then copy and email your responses.</p>
+            <button type="button" class="btn btn-primary" onclick="generateResponses()">Generate My Responses</button>
+            
+            <div id="output-area">
+                <p><strong>Your responses:</strong> Copy everything below and paste into an email.</p>
+                <textarea id="output-text" readonly></textarea>
+                <button type="button" class="btn btn-secondary" onclick="copyText()">Copy to Clipboard</button>
+                <p style="margin-top:16px">Email to:</p>
+                <div class="email-address">paul.beashel@excellence-first.com</div>
+                <button type="button" class="btn btn-primary" onclick="sendEmail()">Open Email App</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+function getVal(id) {
+    var el = document.getElementById(id);
+    return el ? (el.value || '') : '';
+}
+
+function getRadio(name) {
+    var el = document.querySelector('input[name="'+name+'"]:checked');
+    return el ? el.value : '';
+}
+
+function generateResponses() {
+    var school = getVal('school');
+    if (!school) {
+        alert('Please select your school (question 2)');
+        return;
+    }
+    
+    var ratings = ['q4','q5','q6','q7','q8','q11','q12','q13','q14','q15','q18','q19','q20','q21','q22','q23','q26','q27','q31'];
+    for (var i = 0; i < ratings.length; i++) {
+        if (!getRadio(ratings[i])) {
+            alert('Please answer all rating questions marked with * before submitting');
+            return;
+        }
+    }
+    
+    if (!getVal('usedProfBot')) {
+        alert('Please answer question 28 (Did you use ProfBot?)');
+        return;
+    }
+    
+    var studentName = getVal('studentName') || 'Anonymous';
+    var now = new Date();
+    var date = now.toLocaleDateString('en-GB');
+    var time = now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    
+    var t = '';
+    t += '=== COGNATEUK FUTURE-READY EVALUATION ===\n';
+    t += 'Submitted: ' + date + ' ' + time + '\n\n';
+    
+    t += '-- DETAILS --\n';
+    t += 'Name: ' + studentName + '\n';
+    t += 'School: ' + school + '\n';
+    t += 'Subjects: ' + (getVal('subjects') || '-') + '\n\n';
+    
+    t += '-- OVERALL (1-5) --\n';
+    t += 'Q4 Expectations: ' + getRadio('q4') + '\n';
+    t += 'Q5 Recommend: ' + getRadio('q5') + '\n';
+    t += 'Q6 Format: ' + getRadio('q6') + '\n';
+    t += 'Q7 Timing: ' + getRadio('q7') + '\n';
+    t += 'Q8 Balance: ' + getRadio('q8') + '\n';
+    t += 'Q9 Effectiveness: ' + getVal('effectiveness') + '/100\n';
+    t += 'Q10 Most valuable: ' + (getVal('mostValuable') || '-') + '\n\n';
+    
+    t += '-- COACHING (1-5) --\n';
+    t += 'Q11 Understand self: ' + getRadio('q11') + '\n';
+    t += 'Q12 Values: ' + getRadio('q12') + '\n';
+    t += 'Q13 SCARF: ' + getRadio('q13') + '\n';
+    t += 'Q14 Jeff: ' + getRadio('q14') + '\n';
+    t += 'Q15 Confident: ' + getRadio('q15') + '\n';
+    t += 'Q16 Impact: ' + (getVal('coachingImpact') || '-') + '\n';
+    t += 'Q17 Improve: ' + (getVal('coachingImprove') || '-') + '\n\n';
+    
+    t += '-- AI SESSIONS (1-5) --\n';
+    t += 'Q18 Understand AI: ' + getRadio('q18') + '\n';
+    t += 'Q19 Clear: ' + getRadio('q19') + '\n';
+    t += 'Q20 Limitations: ' + getRadio('q20') + '\n';
+    t += 'Q21 Appropriate use: ' + getRadio('q21') + '\n';
+    t += 'Q22 Prof Ball: ' + getRadio('q22') + '\n';
+    t += 'Q23 Confident: ' + getRadio('q23') + '\n';
+    t += 'Q24 Surprise: ' + (getVal('aiSurprise') || '-') + '\n';
+    t += 'Q25 More depth: ' + (getVal('aiMoreDepth') || '-') + '\n\n';
+    
+    t += '-- PLATFORM (1-5) --\n';
+    t += 'Q26 Navigate: ' + getRadio('q26') + '\n';
+    t += 'Q27 Resources: ' + getRadio('q27') + '\n';
+    t += 'Q28 ProfBot: ' + getVal('usedProfBot') + '\n';
+    t += 'Q29 Feedback: ' + (getVal('profBotFeedback') || '-') + '\n';
+    t += 'Q30 Improve: ' + (getVal('platformImprove') || '-') + '\n\n';
+    
+    t += '-- FINAL --\n';
+    t += 'Q31 Influenced: ' + getRadio('q31') + '\n';
+    t += 'Q32 Continue: ' + (getVal('continuePlatform') || '-') + '\n';
+    t += 'Q33 Future: ' + (getVal('futureInterest') || '-') + '\n';
+    t += 'Q34 Change: ' + (getVal('oneChange') || '-') + '\n';
+    t += 'Q35 Other: ' + (getVal('additionalComments') || '-') + '\n';
+    t += 'Q36 Interview: ' + (getVal('willingInterview') || '-') + '\n';
+    t += 'Q37 Email: ' + (getVal('contactEmail') || '-') + '\n\n';
+    
+    t += '=== END ===\n';
+    
+    document.getElementById('output-text').value = t;
+    document.getElementById('output-area').style.display = 'block';
+    document.getElementById('output-area').scrollIntoView({behavior:'smooth'});
+}
+
+function copyText() {
+    var box = document.getElementById('output-text');
+    box.select();
+    box.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    alert('Copied! Now paste into an email.');
+}
+
+function sendEmail() {
+    var studentName = getVal('studentName') || 'Anonymous';
+    var subj = encodeURIComponent('Future-Ready Survey - ' + studentName);
+    var body = encodeURIComponent(document.getElementById('output-text').value);
+    window.location.href = 'mailto:paul.beashel@excellence-first.com?subject=' + subj + '&body=' + body;
+}
+</script>
+</body>
+</html>
