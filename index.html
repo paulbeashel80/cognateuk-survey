@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future-Ready Programme Survey</title>
+    <title>Survey</title>
 </head>
 <body>
-    <h1>Future-Ready Programme Survey</h1>
+    <h1>Cognate UK Survey</h1>
     <form action="https://formspree.io/f/xzdabbze" method="POST">
-        <label for="question1">1. What is your name?</label>
-        <input type="text" name="question1" required>
-        <br><br>
-
-        <!-- Add additional 36 questions here following the same structure -->
-
-        <label for="question37">37. Any additional comments?</label>
-        <textarea name="question37"></textarea>
-        <br><br>
-
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <!-- Here include all 37 questions from index (4).html -->
+        <label for="question1">Question 1:</label>
+        <input type="text" id="question1" name="question1" required><br><br>
+        <label for="question2">Question 2:</label>
+        <input type="text" id="question2" name="question2" required><br><br>
+        <!-- Add all other questions similarly -->
+        <label for="question37">Question 37:</label>
+        <input type="text" id="question37" name="question37" required><br><br>
         <button type="submit">Submit</button>
     </form>
 </body>
